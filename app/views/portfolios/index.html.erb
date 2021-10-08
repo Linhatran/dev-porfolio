@@ -5,4 +5,6 @@
   <p><%= item.subtitle%></p>
   <p><%= item.body%></p>
   <%= image_tag item.thumb_image if item.thumb_image.present? %>
+
+  <a><%= link_to 'Edit', edit_portfolio_path(item)%></a>
 <% end %>

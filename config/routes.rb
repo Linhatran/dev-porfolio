@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about' # route name can be anything besides 'about', as long as we point to the 'about' method
   get 'contact', to: 'pages#contact'
 
-  resources :blogs
-
+  resources :blogs do
+    member do
+      get :toggle_status
+    end
+  end
   root to: 'pages#home' # can be named anything besides 'home'
 end

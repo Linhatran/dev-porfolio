@@ -30,3 +30,4 @@ credentials.yml.enc
 .DS_Store
 .secret
 library
+config/initializers/devise.rb

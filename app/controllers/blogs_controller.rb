@@ -1,7 +1,8 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show edit update destroy toggle_status]
   layout "blog"
-  
+  access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
+
   # GET /blogs or /blogs.json
   def index
     @blogs = Blog.all
@@ -75,7 +76,7 @@ class BlogsController < ApplicationController
       @blog = Blog.friendly.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+  # Only allow a list of trusted parameters through.
     def blog_params
       params.require(:blog).permit(:title, :body)
     end

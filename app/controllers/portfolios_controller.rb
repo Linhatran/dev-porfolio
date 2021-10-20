@@ -1,6 +1,7 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio_item, only: [:edit, :update, :show, :destroy]
   layout 'portfolio'
+  access all: [:show, :index, :react, :ruby_on_rails_portfolio_items], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
 
     def index
       @portfolio_items = Portfolio.all
@@ -35,7 +36,6 @@ class PortfoliosController < ApplicationController
     end
 
     def update
-      set_portfolio_item
       respond_to do |format|
         if @portfolio_item.update(portfolio_params)
           format.html { redirect_to portfolios_path, notice: 'Your portfolio item was edited' }
@@ -65,7 +65,7 @@ class PortfoliosController < ApplicationController
       params.require(:portfolio).permit(:title, :subtitle, :body, :image, technologies_attributes: [:name])
     end
 
-    def method_name
+    def set_portfolio_item
       @portfolio_item = Portfolio.find(params[:id])
     end
 end
